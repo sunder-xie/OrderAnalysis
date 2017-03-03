@@ -1,0 +1,15 @@
+# folder
+bin
+*/bin
+.settings
+*/.settings
+target
+*/target
+
+# file
+*.class
+*/*.class
+.classpath
+*/.classpath
+.project
+*/.project
