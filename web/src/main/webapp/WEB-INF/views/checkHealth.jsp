@@ -1,5 +1,5 @@
 <html>
 <body>
-<h2>I am Spring MVC</h2>
+	<h1>I am alive!</h1>
 </body>
 </html>

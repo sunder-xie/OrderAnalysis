@@ -1,22 +1,48 @@
 <?xml version="1.0"?>
-<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <modelVersion>4.0.0</modelVersion>
-  <parent>
-    <groupId>org.sysu.sdcs</groupId>
-    <artifactId>order-analysis</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
-  </parent>
-  <groupId>org.sysu.sdcs.order.analysis</groupId>
-  <artifactId>service</artifactId>
-  <name>service</name>
-  <properties>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-  </properties>
-  <dependencies>
-    <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-    </dependency>
-  </dependencies>
+<project
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
+	xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>org.sysu.sdcs</groupId>
+		<artifactId>order-analysis</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+	</parent>
+	<groupId>org.sysu.sdcs.order.analysis</groupId>
+	<artifactId>service</artifactId>
+	<name>service</name>
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	</properties>
+	<dependencies>
+		<!-- inner project -->
+		<dependency>
+			<groupId>org.sysu.sdcs.order.analysis</groupId>
+			<artifactId>model</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+		<!-- test framework -->
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+		</dependency>
+		<!-- spring framework -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-orm</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-webmvc</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context</artifactId>
+		</dependency>
+	</dependencies>
 </project>
