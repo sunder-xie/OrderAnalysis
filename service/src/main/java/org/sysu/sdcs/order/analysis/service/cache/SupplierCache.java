@@ -20,12 +20,22 @@ public class SupplierCache extends AbstractCache<SupplierModel> implements Updat
 	private SupplierMapper supplierDAO;
 
 	public void update() {
-		LOGGER.info("Begin update supplier cache");
-		List<Supplier> allSppulier = supplierDAO.findAll();
-		for (Supplier supplier : allSppulier) {
-			addOrUpdate(supplier.getId(), POAdapter.convert(supplier));
+		try {
+			LOGGER.info("Begin update supplier cache.");
+			long beginTime = System.currentTimeMillis();
+			List<Supplier> allSppulier = supplierDAO.findAll();
+			if(allSppulier == null || allSppulier.isEmpty()) {
+				LOGGER.warn("Sppulier cache is empty.");
+				return;
+			}
+			for (Supplier supplier : allSppulier) {
+				addOrUpdate(supplier.getId(), POAdapter.convert(supplier));
+			}
+			long endTime = System.currentTimeMillis();
+			LOGGER.info("Finish update supplier cache, size {}, spend {}ms.", allSppulier.size(), endTime - beginTime);
+		} catch (Exception ex) {
+			LOGGER.error("Update order cache fail.", ex);
 		}
-		LOGGER.info("Finish update supplier cache, cache size:{}", allSppulier.size());
 	}
 
 }

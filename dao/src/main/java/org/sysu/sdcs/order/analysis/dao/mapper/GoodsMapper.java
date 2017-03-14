@@ -10,6 +10,6 @@ import org.sysu.sdcs.order.analysis.model.po.Goods;
  */
 public interface GoodsMapper 
 {
-    public Goods findById(long id);
-    public List<Goods> findAll();
+    public Goods findById(long id) throws Exception;
+    public List<Goods> findAll() throws Exception;
 }

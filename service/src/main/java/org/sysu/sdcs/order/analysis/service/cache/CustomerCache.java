@@ -26,12 +26,21 @@ public class CustomerCache extends AbstractCache<CustomerModel> implements Updat
 	private CustomerMapper customerDAO;
 
 	public void update() {
-		LOGGER.info("Begin update customer cache");
-		List<Customer> allCustomer = customerDAO.findAll();
-		for (Customer customer : allCustomer) {
-			addOrUpdate(customer.getId(), POAdapter.convert(customer));
+		try {
+			LOGGER.info("Begin update customer cache.");
+			long beginTime = System.currentTimeMillis();
+			List<Customer> allCustomer = customerDAO.findAll();
+			if(allCustomer == null || allCustomer.isEmpty()) {
+				LOGGER.warn("Customer cache is empty.");
+				return;
+			}
+			for (Customer customer : allCustomer) {
+				addOrUpdate(customer.getId(), POAdapter.convert(customer));
+			}
+			long endTime = System.currentTimeMillis();
+			LOGGER.info("Finish update customer cache, size {}, spend {}ms.", allCustomer.size(), endTime - beginTime);
+		} catch (Exception ex) {
+			LOGGER.error("Update customer cache fail.", ex);
 		}
-		LOGGER.info("Finish update customer cache, cache size:{}", allCustomer.size());
 	}
-
 }

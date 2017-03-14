@@ -1,46 +1,61 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Configuration status="WARN">
+	<Properties>
+		<property name="log.pattern">%d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %-5level %logger - %m%n</property>
+		<property name="log.folder.name">${sys:user.home}/logs/order_analysis</property>
+		<property name="log.suffix.name">-%d{yyyy-MM-dd}-%i.log.gz</property>
+		<property name="log.max.size">1 M</property>
+	</Properties>
 	<Appenders>
-		<Console name="Console" target="SYSTEM_OUT">
-			<PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n" />
+		<Console
+			name="Console"
+			target="SYSTEM_OUT">
+			<PatternLayout pattern="${log.pattern}" />
 		</Console>
 		<RollingFile name="Info"
-			fileName="${sys:user.home}/logs/order_analysis/info.log"
-			filePattern="${sys:user.home}/logs/order_analysis/$${date:yyyy-MM}/info-%d{yyyy-MM-dd}-%i.log.gz">
-			<ThresholdFilter level="info" />
-			<PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n" />
+			fileName="${log.folder.name}/info.log"
+			filePattern="${log.folder.name}/$${date:yyyy-MM}/info${log.suffix.name}">
+			<Filters>
+                <ThresholdFilter level="INFO"/>
+                <ThresholdFilter level="WARN" onMatch="DENY" onMismatch="NEUTRAL"/>
+            </Filters>
+			<PatternLayout pattern="${log.pattern}" />
 			<Policies>
 				<TimeBasedTriggeringPolicy />
-				<SizeBasedTriggeringPolicy size="100 MB" />
+				<SizeBasedTriggeringPolicy size="${log.max.size}" />
 			</Policies>
 		</RollingFile>
-				<RollingFile name="Warn"
-			fileName="${sys:user.home}/logs/order_analysis/warn.log"
-			filePattern="${sys:user.home}/logs/order_analysis/$${date:yyyy-MM}/warn-%d{yyyy-MM-dd}-%i.log.gz">
-			<ThresholdFilter level="warn" />
-			<PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n" />
+		<RollingFile name="Warn"
+			fileName="${log.folder.name}/warn.log"
+			filePattern="${log.folder.name}/$${date:yyyy-MM}/warn${log.suffix.name}">
+			<Filters>
+                <ThresholdFilter level="WARN"/>
+                <ThresholdFilter level="ERROR" onMatch="DENY" onMismatch="NEUTRAL"/>
+            </Filters>
+            <PatternLayout
+				pattern="${log.pattern}" />
 			<Policies>
 				<TimeBasedTriggeringPolicy />
-				<SizeBasedTriggeringPolicy size="100 MB" />
+				<SizeBasedTriggeringPolicy size="${log.max.size}" />
 			</Policies>
 		</RollingFile>
-				<RollingFile name="Error"
-			fileName="${sys:user.home}/logs/order_analysis/error.log"
-			filePattern="${sys:user.home}/logs/order_analysis/$${date:yyyy-MM}/error-%d{yyyy-MM-dd}-%i.log.gz">
+		<RollingFile name="Error"
+			fileName="${log.folder.name}/error.log"
+			filePattern="${log.folder.name}/$${date:yyyy-MM}/error${log.suffix.name}">
 			<ThresholdFilter level="error" />
-			<PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n" />
+			<PatternLayout pattern="${log.pattern}" />
 			<Policies>
 				<TimeBasedTriggeringPolicy />
-				<SizeBasedTriggeringPolicy size="100 MB" />
+				<SizeBasedTriggeringPolicy size="${log.max.size}" />
 			</Policies>
 		</RollingFile>
 	</Appenders>
 	<Loggers>
-		<Root level="all">
+		<AsyncRoot level="all">
 			<AppenderRef ref="Console" />
 			<AppenderRef ref="Info" />
 			<AppenderRef ref="Warn" />
 			<AppenderRef ref="Error" />
-		</Root>
+		</AsyncRoot>
 	</Loggers>
 </Configuration>  

@@ -25,42 +25,46 @@
     http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd
     http://www.springframework.org/schema/task 
     http://www.springframework.org/schema/task/spring-task-4.0.xsd">
+    <!-- auto scan annotation -->
 	<context:annotation-config />
+	<!-- base package of the program -->
 	<context:component-scan base-package="org.sysu.sdcs.order.analysis">
 		<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller" />
 	</context:component-scan>
+	<!-- spring schedule driver -->
 	<task:annotation-driven scheduler="scheduler" mode="proxy" />
 	<task:scheduler id="scheduler" pool-size="10" />
-	
-	<context:property-placeholder location="classpath:jdbc.properties" ignore-unresolvable="true" />
-	<context:property-placeholder location="classpath:scheduler.properties" ignore-unresolvable="true" />
-	
+	<!-- load jdbc configuration -->
+	<context:property-placeholder location="classpath:database/jdbc.properties" ignore-unresolvable="true" />
+	<!-- load spring schedule configuration -->
+	<context:property-placeholder location="classpath:spring/scheduler.properties" ignore-unresolvable="true" />
+	<!-- load email configuration -->
+	<context:property-placeholder location="classpath:email.properties" ignore-unresolvable="true" />
+	<!-- data source using dbcp2 -->
 	<bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource" destroy-method="close">
 		<property name="driverClassName" value="${jdbc.driverClassName}" />
 		<property name="url" value="${jdbc.url}" />
 		<property name="username" value="${jdbc.username}" />
 		<property name="password" value="${jdbc.password}" />
-		<property name="maxTotal" value="${jdbc.maxActive}" />   
+		<property name="initialSize" value="${jdbc.initialSize}"/>
+		<property name="maxTotal" value="${jdbc.maxTotal}" />   
         <property name="maxIdle" value="${jdbc.maxIdle}" />   
-        <property name="maxWaitMillis" value="${jdbc.maxWait}" />   
+        <property name="maxWaitMillis" value="${jdbc.maxWaitMillis}" />   
 	</bean>
-
+	<!-- mybatis sql session factory -->
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSource" />
-		<property name="configLocation" value="classpath:mybatis.xml" />
-		<property name="mapperLocations" value="classpath:sqlmapper/*.xml" />
+		<property name="configLocation" value="classpath:database/mybatis.xml" />
+		<property name="mapperLocations" value="classpath:database/sqlmapper/*.xml" />
     </bean>
-    
-    <!-- Transaction manager for a single JDBC DataSource -->
+    <!-- transaction manager for jdbc data source -->
     <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
         <property name="dataSource" ref="dataSource" />
     </bean>
-    
-    <!-- 使用annotation定义事务 -->
+    <!-- transaction manager driver-->
     <tx:annotation-driven transaction-manager="transactionManager" /> 
-    
+    <!-- mybatis mapper scanner -->
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
       <property name="basePackage" value="org.sysu.sdcs.order.analysis.dao.mapper" />
     </bean>
-
 </beans>

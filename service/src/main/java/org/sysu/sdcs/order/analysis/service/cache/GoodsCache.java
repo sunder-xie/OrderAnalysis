@@ -20,12 +20,23 @@ public class GoodsCache extends AbstractCache<GoodsModel> implements UpdateAble 
 	private GoodsMapper goodsDAO;
 
 	public void update() {
-		LOGGER.info("Begin update goods cache");
-		List<Goods> allGoods = goodsDAO.findAll();
-		for (Goods goods : allGoods) {
-			addOrUpdate(goods.getId(), POAdapter.convert(goods));
+		try {
+			LOGGER.info("Begin update goods cache.");
+			long beginTime = System.currentTimeMillis();
+			List<Goods> allGoods = goodsDAO.findAll();
+			if(allGoods == null || allGoods.isEmpty()) {
+				LOGGER.warn("Goods cache is empty.");
+				return;
+			}
+			for (Goods goods : allGoods) {
+				addOrUpdate(goods.getId(), POAdapter.convert(goods));
+			}
+			long endTime = System.currentTimeMillis();
+			LOGGER.info("Finish update goods cache, size {}, spend {}ms.", allGoods.size(), endTime - beginTime);
+
+		} catch (Exception ex) {
+			LOGGER.error("Update goods cache fail.", ex);
 		}
-		LOGGER.info("Finish update goods cache, cache size:{}", allGoods.size());
 	}
 
 }

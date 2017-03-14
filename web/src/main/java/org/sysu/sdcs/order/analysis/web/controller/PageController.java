@@ -12,9 +12,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/")
 public class PageController {
 
-	@RequestMapping("/hello")
-	public String hello() {
+	@RequestMapping("/checkHealth")
+	public String checkHealth() {
 		return "checkHealth";
 	}
-
+	@RequestMapping("/emailSender")
+	public String emailSender() {
+		return "emailSender";
+	}
 }

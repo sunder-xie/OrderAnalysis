@@ -20,12 +20,22 @@ public class GoodsTypeCache extends AbstractCache<GoodsTypeModel> implements Upd
 	private GoodsTypeMapper goodsTypeDAO;
 
 	public void update() {
-		LOGGER.info("Begin update goods type cache");
-		List<GoodsType> allGoodsType = goodsTypeDAO.findAll();
-		for (GoodsType goodsType : allGoodsType) {
-			addOrUpdate(goodsType.getId(), POAdapter.convert(goodsType));
+		try {
+			LOGGER.info("Begin update goods type cache.");
+			long beginTime = System.currentTimeMillis();
+			List<GoodsType> allGoodsType = goodsTypeDAO.findAll();
+			if(allGoodsType == null || allGoodsType.isEmpty()) {
+				LOGGER.warn("Goods type cache is empty.");
+				return;
+			}
+			for (GoodsType goodsType : allGoodsType) {
+				addOrUpdate(goodsType.getId(), POAdapter.convert(goodsType));
+			}
+			long endTime = System.currentTimeMillis();
+			LOGGER.info("Finish update goods type cache, size {}, spend {}ms.", allGoodsType.size(), endTime - beginTime);
+		} catch (Exception ex) {
+			LOGGER.error("Update goods cache fail.", ex);
 		}
-		LOGGER.info("Finish update goods type cache, cache size:{}", allGoodsType.size());
 	}
 
 }

@@ -24,13 +24,23 @@ public class OrderCache extends AbstractCache<OrderModel> implements UpdateAble 
 	private OrderDetailMapper orderDetailDAO;
 
 	public void update() {
-		LOGGER.info("Begin update order cache");
-		List<Order> allOrder = orderDAO.findAll();
-		for (Order order : allOrder) {
-			List<OrderDetail> orderDetail = orderDetailDAO.findById(order.getId());
-			addOrUpdate(order.getId(), POAdapter.convert(order,orderDetail));
+		try {
+			LOGGER.info("Begin update order cache.");
+			long beginTime = System.currentTimeMillis();
+			List<Order> allOrder = orderDAO.findAll();
+			if(allOrder == null || allOrder.isEmpty()) {
+				LOGGER.warn("Order cache is empty.");
+				return;
+			}
+			for (Order order : allOrder) {
+				List<OrderDetail> orderDetail = orderDetailDAO.findById(order.getId());
+				addOrUpdate(order.getId(), POAdapter.convert(order, orderDetail));
+			}
+			long endTime = System.currentTimeMillis();
+			LOGGER.info("Finish update order cache, size {}, spend {}ms.", allOrder.size(), endTime - beginTime);
+		} catch (Exception ex) {
+			LOGGER.error("Update order cache fail.", ex);
 		}
-		LOGGER.info("Finish update goods cache, cache size:{}", allOrder.size());
 	}
 
 }

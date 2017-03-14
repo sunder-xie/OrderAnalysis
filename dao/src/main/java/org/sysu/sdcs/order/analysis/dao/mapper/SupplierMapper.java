@@ -10,6 +10,6 @@ import org.sysu.sdcs.order.analysis.model.po.Supplier;
  */
 public interface SupplierMapper 
 {
-    public Supplier findById(long id);
-    public List<Supplier> findAll();
+    public Supplier findById(long id) throws Exception;
+    public List<Supplier> findAll() throws Exception;
 }
