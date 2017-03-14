@@ -20,12 +20,38 @@
 
 	<!-- 依赖配置 -->
 	<dependencies>
+		<!-- inner project -->
+		<dependency>
+			<groupId>org.sysu.sdcs.order.analysis</groupId>
+			<artifactId>model</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
 		<!-- 测试模块 -->
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
 		</dependency>
 		<!-- spring框架 -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-orm</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-core</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-web</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-webmvc</artifactId>
+		</dependency>
 		<!-- log4j2日志框架 -->
 		<dependency>
 			<groupId>org.apache.logging.log4j</groupId>
@@ -38,6 +64,10 @@
 		<dependency>
 			<groupId>org.apache.logging.log4j</groupId>
 			<artifactId>log4j-slf4j-impl</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.google.code.gson</groupId>
+			<artifactId>gson</artifactId>
 		</dependency>
 	</dependencies>
 </project>

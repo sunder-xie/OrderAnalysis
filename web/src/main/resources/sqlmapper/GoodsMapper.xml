@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.sysu.sdcs.order.analysis.dao.mapper.GoodsMapper">
+	<cache/>
+	<select id="findById" parameterType="long" resultType="org.sysu.sdcs.order.analysis.model.po.Goods">
+		SELECT
+		goods.id AS 'id',
+		goods.type AS 'type',
+		goods.name AS 'name',
+		goods.supplier AS 'supplier',
+		goods.desc AS 'desc',
+		goods.price AS 'price',
+		goods.stock AS 'stock'
+		FROM goods 
+		WHERE id=#{id}
+	</select>
+	<select id="findAll" resultType="org.sysu.sdcs.order.analysis.model.po.Goods">
+		SELECT
+		goods.id AS 'id',
+		goods.type AS 'type',
+		goods.name AS 'name',
+		goods.supplier AS 'supplier',
+		goods.desc AS 'desc',
+		goods.price AS 'price',
+		goods.stock AS 'stock'
+		FROM goods
+	</select>
+</mapper>

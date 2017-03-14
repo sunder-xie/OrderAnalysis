@@ -24,7 +24,17 @@
 		<!-- 同级工程 -->
 		<dependency>
 			<groupId>org.sysu.sdcs.order.analysis</groupId>
+			<artifactId>model</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>org.sysu.sdcs.order.analysis</groupId>
 			<artifactId>utils</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>org.sysu.sdcs.order.analysis</groupId>
+			<artifactId>dao</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
 		<dependency>
@@ -78,22 +88,5 @@
 			<scope>provided</scope>
 		</dependency>
 	</dependencies>
-	<!-- 构建配置
-		 java版本1.8
-		 web版本3.1
-	 -->
-	<build>
-		<finalName>orderAnalysis</finalName>
-		<plugins>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<version>3.1</version>
-				<configuration>
-					<source>1.8</source>
-					<target>1.8</target>
-				</configuration>
-			</plugin>
-		</plugins>
-	</build>
+
 </project>

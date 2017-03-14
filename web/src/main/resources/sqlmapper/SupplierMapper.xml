@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.sysu.sdcs.order.analysis.dao.mapper.SupplierMapper">
+	<cache/>
+	<select id="findById" parameterType="long" resultType="org.sysu.sdcs.order.analysis.model.po.Supplier">
+		SELECT
+		supplier.id AS 'id',
+		supplier.name AS 'name',
+		supplier.phone AS 'phone'
+		FROM supplier 
+		WHERE id=#{id}
+	</select>
+	<select id="findAll" resultType="org.sysu.sdcs.order.analysis.model.po.Supplier">
+		SELECT
+		supplier.id AS 'id',
+		supplier.name AS 'name',
+		supplier.phone AS 'phone'
+		FROM supplier 
+	</select>
+</mapper>

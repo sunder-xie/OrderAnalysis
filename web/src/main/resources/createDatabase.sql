@@ -10,10 +10,10 @@ USE order_analysis;
 # Table
 # Customer Information
 CREATE TABLE IF NOT EXISTS `Customer` (
-	`id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+	`id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
 	`name` VARCHAR(20) NOT NULL,
 	`sex` ENUM('male', 'female') NOT NULL,
-	`age` INT UNSIGNED NOT NULL,
+	`age` TINYINT UNSIGNED NOT NULL,
 	`address` VARCHAR(50) NOT NULL,
 	 PRIMARY KEY (`id`)
 );
@@ -23,7 +23,7 @@ INSERT INTO `Customer` (`name`, `sex`, `age`, `address`) VALUE ('zhuang_yx', 'ma
 
 # Goods Type Information
 CREATE TABLE IF NOT EXISTS `Goods_Type` (
-	`id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+	`id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
 	`desc` VARCHAR(20) NOT NULL,
 	PRIMARY KEY (`id`),
 	UNIQUE KEY (`desc`)
@@ -34,7 +34,7 @@ INSERT INTO `Goods_Type` (`desc`) VALUES ('手机'),('电器'),('家具');
 
 # Supplier Information
 CREATE TABLE IF NOT EXISTS `Supplier` (
-	`id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+	`id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
 	`name` VARCHAR(20) NOT NULL,
 	`phone` VARCHAR(20) NOT NULL,
 	PRIMARY KEY (`id`),
@@ -47,9 +47,9 @@ INSERT INTO `Supplier` (`name`, `phone`) VALUES
 
 # Goods information
 CREATE TABLE IF NOT EXISTS `Goods` (
-	`id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
-	`type` INT UNSIGNED NOT NULL,
-	`supplier` INT UNSIGNED NOT NULL,
+	`id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
+	`type` BIGINT UNSIGNED NOT NULL,
+	`supplier` BIGINT UNSIGNED NOT NULL,
 	`name` VARCHAR(30) NOT NULL,
 	`desc` TEXT NULL,
 	`price` DOUBLE NOT NULL,
@@ -66,8 +66,8 @@ INSERT INTO `Goods` (`type`, `supplier`, `name`, `desc`, `price`, `stock`) VALUE
 
 # Order information
 CREATE TABLE IF NOT EXISTS `Order` (
-	`id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
-	`customer` INT UNSIGNED NOT NULL,
+	`id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
+	`customer` BIGINT UNSIGNED NOT NULL,
 	`create_time` DATETIME NOT NULL,
 	PRIMARY KEY (`id`),
 	CONSTRAINT FOREIGN KEY (`customer`) REFERENCES `Customer`(`id`)
@@ -78,9 +78,9 @@ INSERT INTO `Order` (`customer`, `create_time`) VALUE (1, NOW());
 
 # Order Detail information
 CREATE TABLE IF NOT EXISTS `Order_Detail` (
-	`id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
-	`order_id` INT UNSIGNED NOT NULL,
-	`goods_id` INT UNSIGNED NOT NULL,
+	`id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
+	`order_id` BIGINT UNSIGNED NOT NULL,
+	`goods_id` BIGINT UNSIGNED NOT NULL,
 	`goods_count` INT UNSIGNED NOT NULL,
 	`goods_price` DOUBLE NOT NULL,
 	PRIMARY KEY (`id`),

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.sysu.sdcs.order.analysis.dao.mapper.OrderMapper">
+	<cache/>
+	<select id="findById" parameterType="long" resultType="org.sysu.sdcs.order.analysis.model.po.Order">
+		SELECT 
+		orders.id AS id,
+		orders.customer AS customer,
+		orders.create_time AS time 
+		FROM orders 
+		WHERE orders.create_time &lt;=NOW()
+		AND orders.create_time &gt;=DATE_ADD(NOW(),INTERVAL -1 MONTH)
+		AND id=#{id} 
+	</select>
+	<select id="findAll" resultType="org.sysu.sdcs.order.analysis.model.po.Order">
+		SELECT 
+		orders.id AS id,
+		orders.customer AS customer,
+		orders.create_time AS time 
+		FROM orders 
+		WHERE orders.create_time &lt;=NOW()
+		AND orders.create_time &gt;=DATE_ADD(NOW(),INTERVAL -1 MONTH)
+	</select>
+</mapper>

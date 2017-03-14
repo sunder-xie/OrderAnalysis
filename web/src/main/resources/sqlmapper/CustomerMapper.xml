@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.sysu.sdcs.order.analysis.dao.mapper.CustomerMapper">
+	<cache/>
+	<select id="findById" parameterType="long" resultType="org.sysu.sdcs.order.analysis.model.po.Customer">
+		SELECT customer.id AS 'id',
+		customer.name AS 'name',
+		customer.sex AS 'sex',
+		customer.age AS 'age',
+		customer.address AS 'address'
+		FROM customer
+		WHERE id=#{id}
+	</select>
+	<select id="findAll" resultType="org.sysu.sdcs.order.analysis.model.po.Customer">
+		SELECT customer.id AS 'id',
+		customer.name AS 'name',
+		customer.sex AS 'sex',
+		customer.age AS 'age',
+		customer.address AS 'address'
+		FROM customer
+	</select>
+</mapper>

@@ -11,5 +11,6 @@ public class TestLogger {
 		logger.warn("i am warn");
 		logger.error("i am error");
 		logger.info("i am info");
+		logger.info("{}-{}","a","b");
 	}
 }
