@@ -1,4 +1,4 @@
-package org.sysu.sdcs.order.analysis.model.vo;
+package org.sysu.sdcs.order.analysis.model.mvc.request;
 
 public class EmailRequest {
 	private String recipients;

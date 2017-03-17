@@ -2,7 +2,7 @@ package org.sysu.sdcs.order.analysis.dao.mapper;
 
 import java.util.List;
 
-import org.sysu.sdcs.order.analysis.model.po.GoodsType;
+import org.sysu.sdcs.order.analysis.model.database.entity.GoodsType;
 
 /**
  * Get customer information

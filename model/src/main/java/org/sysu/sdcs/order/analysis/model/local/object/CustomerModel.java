@@ -1,25 +1,16 @@
-package org.sysu.sdcs.order.analysis.model.po;
+package org.sysu.sdcs.order.analysis.model.local.object;
 
-import java.io.Serializable;
+import org.sysu.sdcs.order.analysis.model.database.entity.Sex;
 
 /**
  * Customer Information in Database
  * @author Zhuang Yixin
  */
-public class Customer implements Serializable {
-	private long id;
+public class CustomerModel {
 	private String name;
 	private Sex sex;
 	private int age;
 	private String address;
-
-	public long getId() {
-		return id;
-	}
-
-	public void setId(long id) {
-		this.id = id;
-	}
 
 	public String getName() {
 		return name;

@@ -1,7 +1,5 @@
 package org.sysu.sdcs.order.analysis.service.cache.factory;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.sysu.sdcs.order.analysis.service.abract.AbstractCache;
@@ -19,7 +17,6 @@ import org.sysu.sdcs.order.analysis.service.cache.SupplierCache;
  */
 @Service
 public class CacheFactory {
-	private static final Logger LOGGER = LoggerFactory.getLogger(CacheFactory.class);
 	@Autowired
 	private CustomerCache customerCache;
 	@Autowired
@@ -45,8 +42,7 @@ public class CacheFactory {
 		case Order:
 			return orderCache;
 		default:
-			LOGGER.error("There is not exist such cache:{}.", cacheType.toString());
-			throw new Exception(cacheType.toString());
+			throw new NullPointerException(String.format("There is not exist such cache: %s.", cacheType.toString()));
 		}
 	}
 }

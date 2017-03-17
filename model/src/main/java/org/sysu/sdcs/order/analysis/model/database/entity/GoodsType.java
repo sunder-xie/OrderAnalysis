@@ -1,4 +1,4 @@
-package org.sysu.sdcs.order.analysis.model.po;
+package org.sysu.sdcs.order.analysis.model.database.entity;
 
 import java.io.Serializable;
 

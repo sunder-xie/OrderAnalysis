@@ -1,4 +1,4 @@
-package org.sysu.sdcs.order.analysis.model.bo;
+package org.sysu.sdcs.order.analysis.model.local.object;
 
 public class SupplierModel {
 	private String name;

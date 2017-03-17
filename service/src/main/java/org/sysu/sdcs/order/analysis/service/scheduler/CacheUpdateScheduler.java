@@ -26,6 +26,7 @@ public class CacheUpdateScheduler implements AbstractScheduler {
 	@Autowired
 	private OrderCache orderCache;
 
+	@Scheduled(cron = "${cache.refresh.interval}")
 	public void start() {
 		LOGGER.info("Begin update cache.");
 		long beginTime = System.currentTimeMillis();
@@ -38,27 +39,22 @@ public class CacheUpdateScheduler implements AbstractScheduler {
 		LOGGER.info("Finish update cache, spend:{}ms.", finishTime - beginTime);
 	}
 
-	@Scheduled(cron = "${cache.customer.refresh.interval}")
 	public void updateCustomerCache() {
 		customerCache.update();
 	}
 
-	@Scheduled(cron = "${cache.goods.refresh.interval}")
 	public void updateGoodsCache() {
 		goodsCache.update();
 	}
 
-	@Scheduled(cron = "${cache.goods.type.refresh.interval}")
 	public void updateGoodsTypeCache() {
 		goodsTypeCache.update();
 	}
 
-	@Scheduled(cron = "${cache.supplier.refresh.interval}")
 	public void updateSupplierCache() {
 		supplierCache.update();
 	}
 
-	@Scheduled(cron = "${cache.order.refresh.interval}")
 	public void updateOrderCache() {
 		orderCache.update();
 	}

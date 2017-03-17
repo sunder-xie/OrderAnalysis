@@ -1,12 +1,20 @@
-package org.sysu.sdcs.order.analysis.model.bo;
+package org.sysu.sdcs.order.analysis.model.database.entity;
 
+import java.io.Serializable;
 import java.util.Date;
-import java.util.List;
 
-public class OrderModel {
+public class Order implements Serializable {
+	private long id;
 	private long customer;
 	private Date time;
-	private List<OrderDetailModel> goods;
+
+	public long getId() {
+		return id;
+	}
+
+	public void setId(long id) {
+		this.id = id;
+	}
 
 	public long getCustomer() {
 		return customer;
@@ -22,13 +30,5 @@ public class OrderModel {
 
 	public void setTime(Date time) {
 		this.time = time;
-	}
-
-	public List<OrderDetailModel> getGoods() {
-		return goods;
-	}
-
-	public void setGoods(List<OrderDetailModel> goods) {
-		this.goods = goods;
 	}
 }

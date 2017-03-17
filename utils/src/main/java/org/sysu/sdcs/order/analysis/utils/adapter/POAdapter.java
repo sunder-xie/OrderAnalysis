@@ -3,18 +3,18 @@ package org.sysu.sdcs.order.analysis.utils.adapter;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.sysu.sdcs.order.analysis.model.bo.CustomerModel;
-import org.sysu.sdcs.order.analysis.model.bo.GoodsModel;
-import org.sysu.sdcs.order.analysis.model.bo.GoodsTypeModel;
-import org.sysu.sdcs.order.analysis.model.bo.OrderDetailModel;
-import org.sysu.sdcs.order.analysis.model.bo.OrderModel;
-import org.sysu.sdcs.order.analysis.model.bo.SupplierModel;
-import org.sysu.sdcs.order.analysis.model.po.Customer;
-import org.sysu.sdcs.order.analysis.model.po.Goods;
-import org.sysu.sdcs.order.analysis.model.po.GoodsType;
-import org.sysu.sdcs.order.analysis.model.po.Order;
-import org.sysu.sdcs.order.analysis.model.po.OrderDetail;
-import org.sysu.sdcs.order.analysis.model.po.Supplier;
+import org.sysu.sdcs.order.analysis.model.database.entity.Customer;
+import org.sysu.sdcs.order.analysis.model.database.entity.Goods;
+import org.sysu.sdcs.order.analysis.model.database.entity.GoodsType;
+import org.sysu.sdcs.order.analysis.model.database.entity.Order;
+import org.sysu.sdcs.order.analysis.model.database.entity.OrderDetail;
+import org.sysu.sdcs.order.analysis.model.database.entity.Supplier;
+import org.sysu.sdcs.order.analysis.model.local.object.CustomerModel;
+import org.sysu.sdcs.order.analysis.model.local.object.GoodsModel;
+import org.sysu.sdcs.order.analysis.model.local.object.GoodsTypeModel;
+import org.sysu.sdcs.order.analysis.model.local.object.OrderDetailModel;
+import org.sysu.sdcs.order.analysis.model.local.object.OrderModel;
+import org.sysu.sdcs.order.analysis.model.local.object.SupplierModel;
 
 public class POAdapter {
 	public static CustomerModel convert(Customer customer) {

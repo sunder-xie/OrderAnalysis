@@ -33,6 +33,8 @@
 		<commons.pool.version>2.4.2</commons.pool.version>
 		<email.version>1.4.7</email.version>
 		<disruptor.version>3.3.6</disruptor.version>
+		<redis.version>2.9.0</redis.version>
+		<spring.redis.version>1.8.1.RELEASE</spring.redis.version>
 	</properties>
 
 	<dependencyManagement>
@@ -137,6 +139,17 @@
 				<groupId>org.apache.commons</groupId>
 				<artifactId>commons-pool2</artifactId>
 				<version>${commons.pool.version}</version>
+			</dependency>
+			<!-- redis -->
+			<dependency>
+				<groupId>redis.clients</groupId>
+				<artifactId>jedis</artifactId>
+				<version>${redis.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework.data</groupId>
+				<artifactId>spring-data-redis</artifactId>
+				<version>${spring.redis.version}</version>
 			</dependency>
 			<!-- gson json serialize -->
 			<dependency>
