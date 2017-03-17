@@ -1,8 +1,9 @@
-package org.sysu.sdcs.order.analysis.service.cache.factory;
+package org.sysu.sdcs.order.analysis.service.factory.cache;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.sysu.sdcs.order.analysis.service.abract.AbstractCache;
+import org.sysu.sdcs.order.analysis.service.basic.AbstractCache;
+import org.sysu.sdcs.order.analysis.service.basic.AbstractFactory;
 import org.sysu.sdcs.order.analysis.service.cache.CustomerCache;
 import org.sysu.sdcs.order.analysis.service.cache.GoodsCache;
 import org.sysu.sdcs.order.analysis.service.cache.GoodsTypeCache;
@@ -16,7 +17,7 @@ import org.sysu.sdcs.order.analysis.service.cache.SupplierCache;
  *
  */
 @Service
-public class CacheFactory {
+public class CacheFactory extends AbstractFactory<AbstractCache, CacheType> {
 	@Autowired
 	private CustomerCache customerCache;
 	@Autowired
@@ -28,8 +29,9 @@ public class CacheFactory {
 	@Autowired
 	private OrderCache orderCache;
 
+	@Override
 	@SuppressWarnings("rawtypes")
-	public AbstractCache getCache(CacheType cacheType) throws Exception {
+	public AbstractCache getInstance(CacheType cacheType) throws Exception {
 		switch (cacheType) {
 		case Customer:
 			return customerCache;
@@ -45,4 +47,5 @@ public class CacheFactory {
 			throw new NullPointerException(String.format("There is not exist such cache: %s.", cacheType.toString()));
 		}
 	}
+
 }

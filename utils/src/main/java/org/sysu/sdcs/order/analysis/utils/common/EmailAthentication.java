@@ -1,4 +1,4 @@
-package org.sysu.sdcs.order.analysis.utils;
+package org.sysu.sdcs.order.analysis.utils.common;
 
 import javax.mail.Authenticator;
 import javax.mail.PasswordAuthentication;

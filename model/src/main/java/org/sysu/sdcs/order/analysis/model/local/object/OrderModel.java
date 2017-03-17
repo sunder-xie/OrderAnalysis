@@ -6,7 +6,7 @@ import java.util.List;
 public class OrderModel {
 	private long customer;
 	private Date time;
-	private List<OrderDetailModel> goods;
+	private List<OrderDetailModel> details;
 
 	public long getCustomer() {
 		return customer;
@@ -24,11 +24,11 @@ public class OrderModel {
 		this.time = time;
 	}
 
-	public List<OrderDetailModel> getGoods() {
-		return goods;
+	public List<OrderDetailModel> getDetails() {
+		return details;
 	}
 
-	public void setGoods(List<OrderDetailModel> goods) {
-		this.goods = goods;
+	public void setDetails(List<OrderDetailModel> details) {
+		this.details = details;
 	}
 }

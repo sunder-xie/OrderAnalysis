@@ -1,4 +1,4 @@
-package org.sysu.sdcs.order.analysis.service.cache.factory;
+package org.sysu.sdcs.order.analysis.service.factory.cache;
 
 /**
  * The kinds of cache

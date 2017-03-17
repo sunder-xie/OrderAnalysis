@@ -9,8 +9,8 @@ import org.springframework.stereotype.Service;
 import org.sysu.sdcs.order.analysis.dao.mapper.CustomerMapper;
 import org.sysu.sdcs.order.analysis.model.database.entity.Customer;
 import org.sysu.sdcs.order.analysis.model.local.object.CustomerModel;
-import org.sysu.sdcs.order.analysis.service.abract.AbstractCache;
-import org.sysu.sdcs.order.analysis.service.abract.UpdateAble;
+import org.sysu.sdcs.order.analysis.service.basic.AbstractCache;
+import org.sysu.sdcs.order.analysis.service.interfaces.Update;
 import org.sysu.sdcs.order.analysis.utils.adapter.POAdapter;
 
 /**
@@ -20,7 +20,7 @@ import org.sysu.sdcs.order.analysis.utils.adapter.POAdapter;
  *
  */
 @Service
-public class CustomerCache extends AbstractCache<CustomerModel> implements UpdateAble {
+public class CustomerCache extends AbstractCache<CustomerModel> implements Update {
 	private static final Logger LOGGER = LoggerFactory.getLogger(CustomerCache.class);
 	@Autowired
 	private CustomerMapper customerDAO;

@@ -6,8 +6,8 @@ import java.util.Set;
 
 public class OrderIndex extends HashMap<Long, Set<Long>> {
 	public void add(Long key, Long value) {
-		if(this.get(key) == null) {
-			this.put(key,new HashSet<>());
+		if (this.get(key) == null) {
+			this.put(key, new HashSet<>());
 		}
 		this.get(key).add(value);
 	}

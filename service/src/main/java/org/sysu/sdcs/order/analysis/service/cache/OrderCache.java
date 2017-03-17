@@ -1,5 +1,6 @@
 package org.sysu.sdcs.order.analysis.service.cache;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -11,18 +12,19 @@ import org.sysu.sdcs.order.analysis.dao.mapper.OrderMapper;
 import org.sysu.sdcs.order.analysis.model.database.entity.Order;
 import org.sysu.sdcs.order.analysis.model.database.entity.OrderDetail;
 import org.sysu.sdcs.order.analysis.model.local.object.GoodsModel;
+import org.sysu.sdcs.order.analysis.model.local.object.GoodsTypeModel;
 import org.sysu.sdcs.order.analysis.model.local.object.OrderDetailModel;
 import org.sysu.sdcs.order.analysis.model.local.object.OrderModel;
-import org.sysu.sdcs.order.analysis.service.abract.AbstractCache;
-import org.sysu.sdcs.order.analysis.service.abract.UpdateAble;
-import org.sysu.sdcs.order.analysis.service.cache.factory.CacheFactory;
-import org.sysu.sdcs.order.analysis.service.cache.factory.CacheType;
-import org.sysu.sdcs.order.analysis.service.index.factory.IndexFactory;
-import org.sysu.sdcs.order.analysis.service.index.factory.IndexType;
+import org.sysu.sdcs.order.analysis.service.basic.AbstractCache;
+import org.sysu.sdcs.order.analysis.service.factory.cache.CacheFactory;
+import org.sysu.sdcs.order.analysis.service.factory.cache.CacheType;
+import org.sysu.sdcs.order.analysis.service.factory.index.IndexFactory;
+import org.sysu.sdcs.order.analysis.service.factory.index.IndexType;
+import org.sysu.sdcs.order.analysis.service.interfaces.Update;
 import org.sysu.sdcs.order.analysis.utils.adapter.POAdapter;
 
 @Service
-public class OrderCache extends AbstractCache<OrderModel> implements UpdateAble {
+public class OrderCache extends AbstractCache<OrderModel> implements Update {
 	private static final Logger LOGGER = LoggerFactory.getLogger(OrderCache.class);
 	@Autowired
 	private OrderMapper orderDAO;
@@ -44,8 +46,7 @@ public class OrderCache extends AbstractCache<OrderModel> implements UpdateAble 
 				return;
 			}
 			for (Order order : allOrder) {
-				List<OrderDetail> orderDetail = orderDetailDAO.findById(order.getId());
-				OrderModel orderModel = POAdapter.convert(order, orderDetail);
+				OrderModel orderModel = getOrderModel(order);
 				loadIndex(order.getId(), orderModel);
 				addOrUpdate(order.getId(), orderModel);
 			}
@@ -56,21 +57,57 @@ public class OrderCache extends AbstractCache<OrderModel> implements UpdateAble 
 		}
 	}
 
+	private OrderModel getOrderModel(Order order) throws Exception {
+		OrderModel orderModel = POAdapter.convert(order);
+		List<OrderDetail> orderDetails = orderDetailDAO.findById(order.getId());
+		List<OrderDetailModel> orderDetailModels = new ArrayList<>();
+		for (OrderDetail orderDetail : orderDetails) {
+			OrderDetailModel orderDetailModel = POAdapter.convert(orderDetail);
+			orderDetailModels.add(orderDetailModel);
+		}
+		orderModel.setDetails(orderDetailModels);
+		return orderModel;
+	}
+
 	private void loadIndex(long id, OrderModel orderModel) {
-		indexFactory.getIndex(IndexType.Customer).add(orderModel.getCustomer(), id);
-		List<OrderDetailModel> orderDetails = orderModel.getGoods();
+		indexFactory.add(IndexType.Customer, orderModel.getCustomer(), id);
+		List<OrderDetailModel> orderDetails = orderModel.getDetails();
 		for (OrderDetailModel orderDetail : orderDetails) {
 			long goodsId = orderDetail.getGoods();
 			try {
-				GoodsCache goodsCache = (GoodsCache) cacheFactory.getCache(CacheType.Goods);
-				GoodsModel goodsModel = goodsCache.getCache().get(goodsId);
-				indexFactory.getIndex(IndexType.Goods).add(goodsId, id);
-				indexFactory.getIndex(IndexType.GoodsType).add(goodsModel.getType(), id);
-				indexFactory.getIndex(IndexType.Supplier).add(goodsModel.getSupplier(), id);
+				GoodsCache goodsCache = (GoodsCache) cacheFactory.getInstance(CacheType.Goods);
+				GoodsModel goodsModel = goodsCache.get(goodsId);
+				refreshGoodsTypePrice(goodsModel);
+				indexFactory.add(IndexType.Goods, goodsId, id);
+				indexFactory.add(IndexType.GoodsType, goodsModel.getType(), goodsId);
+				indexFactory.add(IndexType.Supplier, goodsModel.getSupplier(), id);
 			} catch (Exception e) {
 				LOGGER.error("Put index error, order id: {}, goods id: {}.", id, goodsId);
 			}
 		}
+	}
+
+	private void refreshGoodsTypePrice(GoodsModel goodsModel) {
+		try {
+			GoodsTypeCache goodsTypeCache = (GoodsTypeCache) cacheFactory.getInstance(CacheType.GoodsType);
+			GoodsTypeModel goodsType = goodsTypeCache.get(goodsModel.getType());
+			double price = goodsModel.getPrice();
+			Double max = goodsType.getMaxPrice();
+			Double min = goodsType.getMinPrice();
+			if (min == null || min.isNaN()) {
+				goodsType.setMinPrice(goodsModel.getPrice());
+			} else if (min > price) {
+				goodsType.setMinPrice(price);
+			}
+			if (max == null || max.isNaN()) {
+				goodsType.setMaxPrice(goodsModel.getPrice());
+			} else if (max < price) {
+				goodsType.setMaxPrice(price);
+			}
+		} catch (Exception ex) {
+			LOGGER.error("Refresh goods type price fail.", ex);
+		}
+
 	}
 
 }

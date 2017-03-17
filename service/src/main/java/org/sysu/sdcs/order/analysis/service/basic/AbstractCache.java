@@ -1,9 +1,9 @@
-package org.sysu.sdcs.order.analysis.service.abract;
+package org.sysu.sdcs.order.analysis.service.basic;
 
 import java.util.HashMap;
 import java.util.Map;
 
-public class AbstractCache<T> {
+public abstract class AbstractCache<T> {
 	private Map<Long, T> cache = new HashMap<Long, T>();
 
 	public void addOrUpdate(Long key, T value) {
@@ -22,5 +22,13 @@ public class AbstractCache<T> {
 	
 	public Map<Long,T> getCache() {
 		return cache;
+	}
+	
+	public T get(long key) {
+		return cache.get(key);
+	}
+	
+	public void add(long key,T value) {
+		cache.put(key, value);
 	}
 }

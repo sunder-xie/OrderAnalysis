@@ -5,15 +5,15 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
-import org.sysu.sdcs.order.analysis.service.abract.AbstractScheduler;
 import org.sysu.sdcs.order.analysis.service.cache.CustomerCache;
 import org.sysu.sdcs.order.analysis.service.cache.GoodsCache;
 import org.sysu.sdcs.order.analysis.service.cache.GoodsTypeCache;
 import org.sysu.sdcs.order.analysis.service.cache.OrderCache;
 import org.sysu.sdcs.order.analysis.service.cache.SupplierCache;
+import org.sysu.sdcs.order.analysis.service.interfaces.Schedule;
 
 @Service
-public class CacheUpdateScheduler implements AbstractScheduler {
+public class CacheUpdateScheduler implements Schedule {
 	private static final Logger LOGGER = LoggerFactory.getLogger(CacheUpdateScheduler.class);
 	@Autowired
 	private CustomerCache customerCache;

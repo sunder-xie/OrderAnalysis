@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.sysu.sdcs.order.analysis.dao.redis.RedisDAO;
 import org.sysu.sdcs.order.analysis.model.mvc.request.EmailRequest;
-import org.sysu.sdcs.order.analysis.utils.EmailUtil;
+import org.sysu.sdcs.order.analysis.utils.common.EmailUtil;
 
 @Controller
 @RequestMapping("/utils")

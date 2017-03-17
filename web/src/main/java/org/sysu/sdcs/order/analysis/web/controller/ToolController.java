@@ -14,12 +14,12 @@ import org.sysu.sdcs.order.analysis.service.cache.GoodsCache;
 import org.sysu.sdcs.order.analysis.service.cache.GoodsTypeCache;
 import org.sysu.sdcs.order.analysis.service.cache.OrderCache;
 import org.sysu.sdcs.order.analysis.service.cache.SupplierCache;
-import org.sysu.sdcs.order.analysis.service.cache.factory.CacheFactory;
-import org.sysu.sdcs.order.analysis.service.cache.factory.CacheType;
-import org.sysu.sdcs.order.analysis.service.index.factory.IndexFactory;
-import org.sysu.sdcs.order.analysis.service.index.factory.IndexType;
+import org.sysu.sdcs.order.analysis.service.factory.cache.CacheFactory;
+import org.sysu.sdcs.order.analysis.service.factory.cache.CacheType;
+import org.sysu.sdcs.order.analysis.service.factory.index.IndexFactory;
+import org.sysu.sdcs.order.analysis.service.factory.index.IndexType;
 import org.sysu.sdcs.order.analysis.service.scheduler.CacheUpdateScheduler;
-import org.sysu.sdcs.order.analysis.utils.JSONUtil;
+import org.sysu.sdcs.order.analysis.utils.common.JSONUtil;
 
 @Controller
 @RequestMapping("/tools")
@@ -30,48 +30,50 @@ public class ToolController {
 	private CacheUpdateScheduler cacheupdateScheduler;
 	@Autowired
 	private IndexFactory indexFactory;
+	
+	private static final String PRODUCES = "text/json;charset=UTF-8";
 
 	@ResponseBody
-	@RequestMapping(value = "/customer", method = RequestMethod.GET, produces = "text/json;charset=UTF-8")
+	@RequestMapping(value = "/customer", method = RequestMethod.GET, produces = PRODUCES)
 	public String getAllCustomer() throws Exception {
-		CustomerCache cache = (CustomerCache) cacheFactory.getCache(CacheType.Customer);
+		CustomerCache cache = (CustomerCache) cacheFactory.getInstance(CacheType.Customer);
 		return JSONUtil.serialize(cache.getCache());
 	}
 
 	@ResponseBody
-	@RequestMapping(value = "/goods", method = RequestMethod.GET, produces = "text/json;charset=UTF-8")
+	@RequestMapping(value = "/goods", method = RequestMethod.GET, produces = PRODUCES)
 	public String getAllGoods() throws Exception {
-		GoodsCache cache = (GoodsCache) cacheFactory.getCache(CacheType.Goods);
+		GoodsCache cache = (GoodsCache) cacheFactory.getInstance(CacheType.Goods);
 		return JSONUtil.serialize(cache.getCache());
 	}
 
 	@ResponseBody
-	@RequestMapping(value = "/goodsType", method = RequestMethod.GET, produces = "text/json;charset=UTF-8")
+	@RequestMapping(value = "/goodsType", method = RequestMethod.GET, produces = PRODUCES)
 	public String getAllGoodsType() throws Exception {
-		GoodsTypeCache cache = (GoodsTypeCache) cacheFactory.getCache(CacheType.GoodsType);
+		GoodsTypeCache cache = (GoodsTypeCache) cacheFactory.getInstance(CacheType.GoodsType);
 		return JSONUtil.serialize(cache.getCache());
 	}
 
 	@ResponseBody
-	@RequestMapping(value = "/supplier", method = RequestMethod.GET, produces = "text/json;charset=UTF-8")
+	@RequestMapping(value = "/supplier", method = RequestMethod.GET, produces = PRODUCES)
 	public String getAllSupplier() throws Exception {
-		SupplierCache cache = (SupplierCache) cacheFactory.getCache(CacheType.Supplier);
+		SupplierCache cache = (SupplierCache) cacheFactory.getInstance(CacheType.Supplier);
 		return JSONUtil.serialize(cache.getCache());
 	}
 
 	@ResponseBody
-	@RequestMapping(value = "/order", method = RequestMethod.GET, produces = "text/json;charset=UTF-8")
+	@RequestMapping(value = "/order", method = RequestMethod.GET, produces = PRODUCES)
 	public String getAllOrder() throws Exception {
-		OrderCache cache = (OrderCache) cacheFactory.getCache(CacheType.Order);
+		OrderCache cache = (OrderCache) cacheFactory.getInstance(CacheType.Order);
 		return JSONUtil.serialize(cache.getCache());
 	}
 
 	@ResponseBody
-	@RequestMapping(value = "/allIndex", method = RequestMethod.GET, produces = "text/json;charset=UTF-8")
+	@RequestMapping(value = "/allIndex", method = RequestMethod.GET, produces = PRODUCES)
 	public String getAllIndex() throws Exception {
-		Map<IndexType,OrderIndex> allIndex = new HashMap<>();
-		for(IndexType type : IndexType.values()){
-			allIndex.put(type,indexFactory.getIndex(type));
+		Map<IndexType, OrderIndex> allIndex = new HashMap<>();
+		for (IndexType type : IndexType.values()) {
+			allIndex.put(type, indexFactory.getInstance(type));
 		}
 		return JSONUtil.serialize(allIndex);
 	}

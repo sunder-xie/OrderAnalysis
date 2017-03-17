@@ -9,12 +9,12 @@ import org.springframework.stereotype.Service;
 import org.sysu.sdcs.order.analysis.dao.mapper.GoodsTypeMapper;
 import org.sysu.sdcs.order.analysis.model.database.entity.GoodsType;
 import org.sysu.sdcs.order.analysis.model.local.object.GoodsTypeModel;
-import org.sysu.sdcs.order.analysis.service.abract.AbstractCache;
-import org.sysu.sdcs.order.analysis.service.abract.UpdateAble;
+import org.sysu.sdcs.order.analysis.service.basic.AbstractCache;
+import org.sysu.sdcs.order.analysis.service.interfaces.Update;
 import org.sysu.sdcs.order.analysis.utils.adapter.POAdapter;
 
 @Service
-public class GoodsTypeCache extends AbstractCache<GoodsTypeModel> implements UpdateAble {
+public class GoodsTypeCache extends AbstractCache<GoodsTypeModel> implements Update {
 	private static final Logger LOGGER = LoggerFactory.getLogger(GoodsTypeCache.class);
 	@Autowired
 	private GoodsTypeMapper goodsTypeDAO;

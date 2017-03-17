@@ -50,19 +50,28 @@ public class POAdapter {
 		return model;
 	}
 
-	public static OrderModel convert(Order order, List<OrderDetail> orderDetails) {
+	public static OrderModel convert(Order order) {
 		OrderModel model = new OrderModel();
 		model.setCustomer(order.getCustomer());
 		model.setTime(order.getTime());
-		List<OrderDetailModel> goods = new ArrayList<>();
-		for(OrderDetail orderDetail : orderDetails) {
-			OrderDetailModel goodsModel = new OrderDetailModel();
-			goodsModel.setCount(orderDetail.getCount());
-			goodsModel.setGoods(orderDetail.getGoods());
-			goodsModel.setPrice(orderDetail.getPrice());
-			goods.add(goodsModel);
-		}
-		model.setGoods(goods);
+		
 		return model;
+	}
+	
+	public static OrderDetailModel convert(OrderDetail orderDetail) {
+		OrderDetailModel model = new OrderDetailModel();
+		model.setCount(orderDetail.getCount());
+		model.setGoods(orderDetail.getGoods());
+		model.setPrice(orderDetail.getPrice());
+		return model;
+	}
+	
+	public static List<OrderDetailModel> convert(List<OrderDetail> orderDetails) {
+		List<OrderDetailModel> models = new ArrayList<>();
+		for(OrderDetail orderDetail : orderDetails) {
+			OrderDetailModel model = convert(orderDetail);
+			models.add(model);
+		}
+		return models;
 	}
 }

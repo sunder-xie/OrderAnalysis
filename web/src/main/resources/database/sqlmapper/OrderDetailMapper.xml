@@ -4,7 +4,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="org.sysu.sdcs.order.analysis.dao.mapper.OrderDetailMapper">
 	<cache/>
-	<select id="findById" parameterType="long" resultType="org.sysu.sdcs.order.analysis.model.po.OrderDetail">
+	<select id="findById" parameterType="long" resultType="org.sysu.sdcs.order.analysis.model.database.entity.OrderDetail">
 		SELECT order_detail.id AS 'id',
 		order_detail.order_id AS 'order',
 		order_detail.goods_id AS 'goods',
@@ -13,7 +13,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		FROM order_detail
 		WHERE order_detail.order_id=#{id}
 	</select>
-	<select id="findAll" resultType="org.sysu.sdcs.order.analysis.model.po.OrderDetail">
+	<select id="findAll" resultType="org.sysu.sdcs.order.analysis.model.database.entity.OrderDetail">
 		SELECT order_detail.id AS 'id',
 		order_detail.order_id AS 'order',
 		order_detail.goods_id AS 'goods',

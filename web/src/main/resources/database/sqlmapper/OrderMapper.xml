@@ -4,7 +4,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="org.sysu.sdcs.order.analysis.dao.mapper.OrderMapper">
 	<cache/>
-	<select id="findById" parameterType="long" resultType="org.sysu.sdcs.order.analysis.model.po.Order">
+	<select id="findById" parameterType="long" resultType="org.sysu.sdcs.order.analysis.model.database.entity.Order">
 		SELECT 
 		orders.id AS id,
 		orders.customer AS customer,
@@ -14,7 +14,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		AND orders.create_time &gt;=DATE_ADD(NOW(),INTERVAL -1 MONTH)
 		AND id=#{id} 
 	</select>
-	<select id="findAll" resultType="org.sysu.sdcs.order.analysis.model.po.Order">
+	<select id="findAll" resultType="org.sysu.sdcs.order.analysis.model.database.entity.Order">
 		SELECT 
 		orders.id AS id,
 		orders.customer AS customer,
