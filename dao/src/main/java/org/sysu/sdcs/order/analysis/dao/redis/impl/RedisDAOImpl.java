@@ -9,6 +9,7 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.data.redis.connection.RedisConnection;
 import org.springframework.data.redis.core.RedisCallback;
 import org.springframework.data.redis.core.StringRedisTemplate;
+import org.springframework.data.redis.serializer.RedisSerializer;
 import org.springframework.stereotype.Component;
 import org.sysu.sdcs.order.analysis.dao.redis.RedisDAO;
 
@@ -26,7 +27,7 @@ public class RedisDAOImpl implements RedisDAO {
 			@Override
 			public Boolean doInRedis(RedisConnection connection) throws DataAccessException {
 				try {
-					byte[] redisKey = template.getStringSerializer().serialize(key);
+					byte[] redisKey = getSerializer().serialize(key);
 					connection.set(redisKey, value);
 					return true;
 				} catch (Exception ex) {
@@ -43,7 +44,7 @@ public class RedisDAOImpl implements RedisDAO {
 			@Override
 			public Boolean doInRedis(RedisConnection connection) throws DataAccessException {
 				try {
-					byte[] redisKey = template.getStringSerializer().serialize(key);
+					byte[] redisKey = getSerializer().serialize(key);
 					connection.del(redisKey);
 					return true;
 				} catch (Exception ex) {
@@ -60,7 +61,7 @@ public class RedisDAOImpl implements RedisDAO {
 			@Override
 			public byte[] doInRedis(RedisConnection connection) throws DataAccessException {
 				try {
-					byte[] redisKey = template.getStringSerializer().serialize(key);
+					byte[] redisKey = getSerializer().serialize(key);
 					byte[] value = connection.get(redisKey);
 					return value;
 				} catch (Exception ex) {
@@ -77,8 +78,8 @@ public class RedisDAOImpl implements RedisDAO {
 			@Override
 			public Boolean doInRedis(RedisConnection connection) throws DataAccessException {
 				try {
-					byte[] redisKey = template.getStringSerializer().serialize(key);
-					byte[] redisHashKey = template.getStringSerializer().serialize(hashKey);
+					byte[] redisKey = getSerializer().serialize(key);
+					byte[] redisHashKey = getSerializer().serialize(hashKey);
 					return connection.hSet(redisKey, redisHashKey, value);
 				} catch (Exception ex) {
 					LOGGER.error("Redis hSet fail.", ex);
@@ -94,8 +95,8 @@ public class RedisDAOImpl implements RedisDAO {
 			@Override
 			public Long doInRedis(RedisConnection connection) throws DataAccessException {
 				try {
-					byte[] redisKey = template.getStringSerializer().serialize(key);
-					byte[] redisHashKey = template.getStringSerializer().serialize(hashKey);
+					byte[] redisKey = getSerializer().serialize(key);
+					byte[] redisHashKey = getSerializer().serialize(hashKey);
 					return connection.hDel(redisKey, redisHashKey);
 				} catch (Exception ex) {
 					LOGGER.error("Redis hDel fail.", ex);
@@ -111,8 +112,8 @@ public class RedisDAOImpl implements RedisDAO {
 			@Override
 			public byte[] doInRedis(RedisConnection connection) throws DataAccessException {
 				try {
-					byte[] redisKey = template.getStringSerializer().serialize(key);
-					byte[] redisHashKey = template.getStringSerializer().serialize(hashKey);
+					byte[] redisKey = getSerializer().serialize(key);
+					byte[] redisHashKey = getSerializer().serialize(hashKey);
 					byte[] value = connection.hGet(redisKey, redisHashKey);
 					return value;
 				} catch (Exception ex) {
@@ -129,7 +130,7 @@ public class RedisDAOImpl implements RedisDAO {
 			@Override
 			public Map<byte[], byte[]> doInRedis(RedisConnection connection) throws DataAccessException {
 				try {
-					byte[] redisKey = template.getStringSerializer().serialize(key);
+					byte[] redisKey = getSerializer().serialize(key);
 					Map<byte[], byte[]> value = connection.hGetAll(redisKey);
 					return value;
 				} catch (Exception ex) {
@@ -138,5 +139,10 @@ public class RedisDAOImpl implements RedisDAO {
 				}
 			}
 		});
+	}
+
+	@Override
+	public RedisSerializer<String> getSerializer() {
+		return template.getStringSerializer();
 	}
 }

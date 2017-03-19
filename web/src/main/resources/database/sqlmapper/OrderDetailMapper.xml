@@ -5,20 +5,22 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="org.sysu.sdcs.order.analysis.dao.mapper.OrderDetailMapper">
 	<cache/>
 	<select id="findById" parameterType="long" resultType="org.sysu.sdcs.order.analysis.model.database.entity.OrderDetail">
-		SELECT order_detail.id AS 'id',
-		order_detail.order_id AS 'order',
-		order_detail.goods_id AS 'goods',
-		order_detail.goods_count AS 'count',
-		order_detail.goods_price AS 'price'
+		SELECT 
+			order_detail.id AS 'id',
+			order_detail.order_id AS 'order',
+			order_detail.goods_id AS 'goods',
+			order_detail.goods_count AS 'count',
+			order_detail.goods_price AS 'price'
 		FROM order_detail
 		WHERE order_detail.order_id=#{id}
 	</select>
 	<select id="findAll" resultType="org.sysu.sdcs.order.analysis.model.database.entity.OrderDetail">
-		SELECT order_detail.id AS 'id',
-		order_detail.order_id AS 'order',
-		order_detail.goods_id AS 'goods',
-		order_detail.goods_count AS 'count',
-		order_detail.goods_price AS 'price'
+		SELECT 
+			order_detail.id AS 'id',
+			order_detail.order_id AS 'order',
+			order_detail.goods_id AS 'goods',
+			order_detail.goods_count AS 'count',
+			order_detail.goods_price AS 'price'
 		FROM order_detail
 	</select>
 </mapper>

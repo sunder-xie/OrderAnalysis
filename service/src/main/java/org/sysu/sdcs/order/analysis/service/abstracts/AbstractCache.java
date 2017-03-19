@@ -1,4 +1,4 @@
-package org.sysu.sdcs.order.analysis.service.basic;
+package org.sysu.sdcs.order.analysis.service.abstracts;
 
 import java.util.HashMap;
 import java.util.Map;

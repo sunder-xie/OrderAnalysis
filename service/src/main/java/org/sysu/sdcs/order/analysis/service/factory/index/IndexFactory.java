@@ -1,25 +1,29 @@
 package org.sysu.sdcs.order.analysis.service.factory.index;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 import org.springframework.stereotype.Component;
+import org.sysu.sdcs.order.analysis.model.enums.IndexType;
 import org.sysu.sdcs.order.analysis.model.index.OrderIndex;
-import org.sysu.sdcs.order.analysis.service.basic.AbstractFactory;
+import org.sysu.sdcs.order.analysis.service.abstracts.AbstractFactory;
 
 @Component
 public class IndexFactory extends AbstractFactory<OrderIndex, IndexType>{
 	private OrderIndex customerIndex;
 	private OrderIndex goodsIndex;
-	private OrderIndex goodsTypeIndex;
+	private OrderIndex type2GoodsIndex;
 	private OrderIndex supplierIndex;
+	private OrderIndex goods2TypeIndex = new OrderIndex();
 
-	public void initial() {
+	public void initialOrderIndex() {
 		customerIndex = new OrderIndex();
 		goodsIndex = new OrderIndex();
-		goodsTypeIndex = new OrderIndex();
 		supplierIndex = new OrderIndex();
+	}
+	
+	public void initialGoodsIndex() {
+		type2GoodsIndex = new OrderIndex();
+		goods2TypeIndex = new OrderIndex();
 	}
 	@Override
 	public OrderIndex getInstance(IndexType indexType) {
@@ -28,12 +32,14 @@ public class IndexFactory extends AbstractFactory<OrderIndex, IndexType>{
 			return customerIndex;
 		case Goods:
 			return goodsIndex;
-		case GoodsType:
-			return goodsTypeIndex;
+		case Type2Goods:
+			return type2GoodsIndex;
 		case Supplier:
 			return supplierIndex;
+		case Goods2Type:
+			return goods2TypeIndex;
 		default:
-			throw new NullPointerException(String.format("There is not exist such cache: %s.", indexType.toString()));
+			throw new NullPointerException(String.format("There is not such cache: %s.", indexType.toString()));
 		}
 	}
 
@@ -42,8 +48,6 @@ public class IndexFactory extends AbstractFactory<OrderIndex, IndexType>{
 	}
 
 	public List<Long> get(IndexType indexType, Long key) {
-		Set<Long> set = getInstance(indexType).get(key);
-		List<Long> result = new ArrayList<>(set);
-		return result;
+		return getInstance(indexType).get(key);
 	}
 }

@@ -6,25 +6,25 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<cache/>
 	<select id="findById" parameterType="long" resultType="org.sysu.sdcs.order.analysis.model.database.entity.Goods">
 		SELECT
-		goods.id AS 'id',
-		goods.type AS 'type',
-		goods.name AS 'name',
-		goods.supplier AS 'supplier',
-		goods.desc AS 'desc',
-		goods.price AS 'price',
-		goods.stock AS 'stock'
+			goods.id AS 'id',
+			goods.type AS 'type',
+			goods.name AS 'name',
+			goods.supplier AS 'supplier',
+			goods.desc AS 'desc',
+			goods.price AS 'price',
+			goods.stock AS 'stock'
 		FROM goods 
 		WHERE id=#{id}
 	</select>
 	<select id="findAll" resultType="org.sysu.sdcs.order.analysis.model.database.entity.Goods">
 		SELECT
-		goods.id AS 'id',
-		goods.type AS 'type',
-		goods.name AS 'name',
-		goods.supplier AS 'supplier',
-		goods.desc AS 'desc',
-		goods.price AS 'price',
-		goods.stock AS 'stock'
+			goods.id AS 'id',
+			goods.type AS 'type',
+			goods.name AS 'name',
+			goods.supplier AS 'supplier',
+			goods.desc AS 'desc',
+			goods.price AS 'price',
+			goods.stock AS 'stock'
 		FROM goods
 	</select>
 </mapper>

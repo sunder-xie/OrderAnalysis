@@ -2,6 +2,8 @@ package org.sysu.sdcs.order.analysis.dao.redis;
 
 import java.util.Map;
 
+import org.springframework.data.redis.serializer.RedisSerializer;
+
 public interface RedisDAO {
 	boolean set(String key, byte[] value);
 
@@ -16,4 +18,6 @@ public interface RedisDAO {
 	byte[] hGet(String key, String hashKey);
 
 	Map<byte[], byte[]> hGetAll(String key);
+	
+	RedisSerializer<String> getSerializer();
 }

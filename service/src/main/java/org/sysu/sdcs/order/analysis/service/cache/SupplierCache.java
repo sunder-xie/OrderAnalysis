@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 import org.sysu.sdcs.order.analysis.dao.mapper.SupplierMapper;
 import org.sysu.sdcs.order.analysis.model.database.entity.Supplier;
 import org.sysu.sdcs.order.analysis.model.local.object.SupplierModel;
-import org.sysu.sdcs.order.analysis.service.basic.AbstractCache;
+import org.sysu.sdcs.order.analysis.service.abstracts.AbstractCache;
 import org.sysu.sdcs.order.analysis.service.interfaces.Update;
 import org.sysu.sdcs.order.analysis.utils.adapter.POAdapter;
 

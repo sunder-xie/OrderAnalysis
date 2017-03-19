@@ -2,8 +2,9 @@ package org.sysu.sdcs.order.analysis.service.factory.cache;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.sysu.sdcs.order.analysis.service.basic.AbstractCache;
-import org.sysu.sdcs.order.analysis.service.basic.AbstractFactory;
+import org.sysu.sdcs.order.analysis.model.enums.CacheType;
+import org.sysu.sdcs.order.analysis.service.abstracts.AbstractCache;
+import org.sysu.sdcs.order.analysis.service.abstracts.AbstractFactory;
 import org.sysu.sdcs.order.analysis.service.cache.CustomerCache;
 import org.sysu.sdcs.order.analysis.service.cache.GoodsCache;
 import org.sysu.sdcs.order.analysis.service.cache.GoodsTypeCache;
@@ -44,8 +45,7 @@ public class CacheFactory extends AbstractFactory<AbstractCache, CacheType> {
 		case Order:
 			return orderCache;
 		default:
-			throw new NullPointerException(String.format("There is not exist such cache: %s.", cacheType.toString()));
+			throw new NullPointerException(String.format("There is not such cache: %s.", cacheType.toString()));
 		}
 	}
-
 }

@@ -11,15 +11,15 @@ import org.sysu.sdcs.order.analysis.dao.mapper.OrderDetailMapper;
 import org.sysu.sdcs.order.analysis.dao.mapper.OrderMapper;
 import org.sysu.sdcs.order.analysis.model.database.entity.Order;
 import org.sysu.sdcs.order.analysis.model.database.entity.OrderDetail;
+import org.sysu.sdcs.order.analysis.model.enums.CacheType;
+import org.sysu.sdcs.order.analysis.model.enums.IndexType;
 import org.sysu.sdcs.order.analysis.model.local.object.GoodsModel;
 import org.sysu.sdcs.order.analysis.model.local.object.GoodsTypeModel;
 import org.sysu.sdcs.order.analysis.model.local.object.OrderDetailModel;
 import org.sysu.sdcs.order.analysis.model.local.object.OrderModel;
-import org.sysu.sdcs.order.analysis.service.basic.AbstractCache;
+import org.sysu.sdcs.order.analysis.service.abstracts.AbstractCache;
 import org.sysu.sdcs.order.analysis.service.factory.cache.CacheFactory;
-import org.sysu.sdcs.order.analysis.service.factory.cache.CacheType;
 import org.sysu.sdcs.order.analysis.service.factory.index.IndexFactory;
-import org.sysu.sdcs.order.analysis.service.factory.index.IndexType;
 import org.sysu.sdcs.order.analysis.service.interfaces.Update;
 import org.sysu.sdcs.order.analysis.utils.adapter.POAdapter;
 
@@ -36,7 +36,7 @@ public class OrderCache extends AbstractCache<OrderModel> implements Update {
 	private IndexFactory indexFactory;
 
 	public void update() {
-		indexFactory.initial();
+		indexFactory.initialOrderIndex();
 		try {
 			LOGGER.info("Begin update order cache.");
 			long beginTime = System.currentTimeMillis();
@@ -79,7 +79,6 @@ public class OrderCache extends AbstractCache<OrderModel> implements Update {
 				GoodsModel goodsModel = goodsCache.get(goodsId);
 				refreshGoodsTypePrice(goodsModel);
 				indexFactory.add(IndexType.Goods, goodsId, id);
-				indexFactory.add(IndexType.GoodsType, goodsModel.getType(), goodsId);
 				indexFactory.add(IndexType.Supplier, goodsModel.getSupplier(), id);
 			} catch (Exception e) {
 				LOGGER.error("Put index error, order id: {}, goods id: {}.", id, goodsId);

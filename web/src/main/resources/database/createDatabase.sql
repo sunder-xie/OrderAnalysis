@@ -91,3 +91,11 @@ CREATE TABLE IF NOT EXISTS `Order_Detail` (
 INSERT INTO `Order_Detail` (`order_id`, `goods_id`, `goods_count`, `goods_price`) VALUES 
 (1, 1, 1, 9999.0),
 (1, 2, 1, 7000.0);
+
+# Create configure database
+CREATE TABLE IF NOT EXISTS `Configure` (
+	`id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+	`name` VARCHAR(50) NOT NULL,
+	`content` VARCHAR(50) NOT NULL,
+	PRIMARY KEY (`id`)
+);

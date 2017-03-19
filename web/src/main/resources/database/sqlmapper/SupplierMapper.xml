@@ -6,17 +6,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<cache/>
 	<select id="findById" parameterType="long" resultType="org.sysu.sdcs.order.analysis.model.database.entity.Supplier">
 		SELECT
-		supplier.id AS 'id',
-		supplier.name AS 'name',
-		supplier.phone AS 'phone'
+			supplier.id AS 'id',
+			supplier.name AS 'name',
+			supplier.phone AS 'phone'
 		FROM supplier 
 		WHERE id=#{id}
 	</select>
 	<select id="findAll" resultType="org.sysu.sdcs.order.analysis.model.database.entity.Supplier">
 		SELECT
-		supplier.id AS 'id',
-		supplier.name AS 'name',
-		supplier.phone AS 'phone'
+			supplier.id AS 'id',
+			supplier.name AS 'name',
+			supplier.phone AS 'phone'
 		FROM supplier 
 	</select>
 </mapper>

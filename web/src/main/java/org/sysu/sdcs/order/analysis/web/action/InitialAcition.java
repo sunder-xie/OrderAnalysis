@@ -5,11 +5,14 @@ import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Service;
 import org.sysu.sdcs.order.analysis.service.scheduler.CacheUpdateScheduler;
+import org.sysu.sdcs.order.analysis.service.scheduler.ConfigureUpdateScheduler;
 
 @Service
 public class InitialAcition implements ApplicationListener<ContextRefreshedEvent> {
 	@Autowired
 	private CacheUpdateScheduler cacheUpdateScheduler;
+	@Autowired
+	private ConfigureUpdateScheduler configureUpdateScheduler;
 
 	@Override
 	public void onApplicationEvent(ContextRefreshedEvent event) {
@@ -20,6 +23,7 @@ public class InitialAcition implements ApplicationListener<ContextRefreshedEvent
 
 	private void doInitial() {
 		cacheUpdateScheduler.start();
+		configureUpdateScheduler.start();
 	}
 
 }

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.sysu.sdcs.order.analysis.dao.mapper.ConfigureMapper">
+	<cache/>
+	<select id="findAll" resultType="org.sysu.sdcs.order.analysis.model.database.entity.Configure">
+	SELECT 
+		configure.id AS 'id',
+		configure.name AS 'name' ,
+		configure.content AS 'content' 
+	FROM configure
+	</select>
+</mapper>

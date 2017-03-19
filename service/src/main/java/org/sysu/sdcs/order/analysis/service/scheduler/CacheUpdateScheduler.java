@@ -10,10 +10,10 @@ import org.sysu.sdcs.order.analysis.service.cache.GoodsCache;
 import org.sysu.sdcs.order.analysis.service.cache.GoodsTypeCache;
 import org.sysu.sdcs.order.analysis.service.cache.OrderCache;
 import org.sysu.sdcs.order.analysis.service.cache.SupplierCache;
-import org.sysu.sdcs.order.analysis.service.interfaces.Schedule;
+import org.sysu.sdcs.order.analysis.service.interfaces.Scheduler;
 
 @Service
-public class CacheUpdateScheduler implements Schedule {
+public class CacheUpdateScheduler implements Scheduler {
 	private static final Logger LOGGER = LoggerFactory.getLogger(CacheUpdateScheduler.class);
 	@Autowired
 	private CustomerCache customerCache;

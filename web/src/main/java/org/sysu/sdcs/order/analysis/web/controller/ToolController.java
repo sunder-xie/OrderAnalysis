@@ -8,17 +8,20 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.sysu.sdcs.order.analysis.model.enums.CacheType;
+import org.sysu.sdcs.order.analysis.model.enums.IndexType;
 import org.sysu.sdcs.order.analysis.model.index.OrderIndex;
+import org.sysu.sdcs.order.analysis.service.cache.ConfigureHelper;
 import org.sysu.sdcs.order.analysis.service.cache.CustomerCache;
 import org.sysu.sdcs.order.analysis.service.cache.GoodsCache;
 import org.sysu.sdcs.order.analysis.service.cache.GoodsTypeCache;
 import org.sysu.sdcs.order.analysis.service.cache.OrderCache;
 import org.sysu.sdcs.order.analysis.service.cache.SupplierCache;
 import org.sysu.sdcs.order.analysis.service.factory.cache.CacheFactory;
-import org.sysu.sdcs.order.analysis.service.factory.cache.CacheType;
 import org.sysu.sdcs.order.analysis.service.factory.index.IndexFactory;
-import org.sysu.sdcs.order.analysis.service.factory.index.IndexType;
 import org.sysu.sdcs.order.analysis.service.scheduler.CacheUpdateScheduler;
+import org.sysu.sdcs.order.analysis.service.scheduler.ConfigureUpdateScheduler;
+import org.sysu.sdcs.order.analysis.service.scheduler.OrderAnalysisScheduler;
 import org.sysu.sdcs.order.analysis.utils.common.JSONUtil;
 
 @Controller
@@ -29,8 +32,13 @@ public class ToolController {
 	@Autowired
 	private CacheUpdateScheduler cacheupdateScheduler;
 	@Autowired
+	private OrderAnalysisScheduler orderAnalysisScheduler;
+	@Autowired
+	private ConfigureUpdateScheduler configureUpdateScheduler;
+	@Autowired
 	private IndexFactory indexFactory;
-	
+	@Autowired
+	private ConfigureHelper configureHelper;
 	private static final String PRODUCES = "text/json;charset=UTF-8";
 
 	@ResponseBody
@@ -69,7 +77,7 @@ public class ToolController {
 	}
 
 	@ResponseBody
-	@RequestMapping(value = "/allIndex", method = RequestMethod.GET, produces = PRODUCES)
+	@RequestMapping(value = "/index", method = RequestMethod.GET, produces = PRODUCES)
 	public String getAllIndex() throws Exception {
 		Map<IndexType, OrderIndex> allIndex = new HashMap<>();
 		for (IndexType type : IndexType.values()) {
@@ -81,5 +89,17 @@ public class ToolController {
 	@RequestMapping("/updateCache")
 	public void updateCache() throws Exception {
 		cacheupdateScheduler.start();
+	}
+
+	@ResponseBody
+	@RequestMapping(value = "/updateConfig", method = RequestMethod.GET, produces = PRODUCES)
+	public String updateConfig() throws Exception {
+		configureUpdateScheduler.start();
+		return JSONUtil.serialize(configureHelper.getAllConfigure());
+	}
+
+	@RequestMapping("/analysis")
+	public void analysis() throws Exception {
+		orderAnalysisScheduler.start();
 	}
 }

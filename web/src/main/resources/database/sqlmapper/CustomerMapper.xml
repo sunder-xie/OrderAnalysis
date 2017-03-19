@@ -5,20 +5,22 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="org.sysu.sdcs.order.analysis.dao.mapper.CustomerMapper">
 	<cache/>
 	<select id="findById" parameterType="long" resultType="org.sysu.sdcs.order.analysis.model.database.entity.Customer">
-		SELECT customer.id AS 'id',
-		customer.name AS 'name',
-		customer.sex AS 'sex',
-		customer.age AS 'age',
-		customer.address AS 'address'
+		SELECT 
+			customer.id AS 'id',
+			customer.name AS 'name',
+			customer.sex AS 'sex',
+			customer.age AS 'age',
+			customer.address AS 'address'
 		FROM customer
 		WHERE id=#{id}
 	</select>
 	<select id="findAll" resultType="org.sysu.sdcs.order.analysis.model.database.entity.Customer">
-		SELECT customer.id AS 'id',
-		customer.name AS 'name',
-		customer.sex AS 'sex',
-		customer.age AS 'age',
-		customer.address AS 'address'
+		SELECT 
+			customer.id AS 'id',
+			customer.name AS 'name',
+			customer.sex AS 'sex',
+			customer.age AS 'age',
+			customer.address AS 'address'
 		FROM customer
 	</select>
 </mapper>

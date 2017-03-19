@@ -1,4 +1,4 @@
-package org.sysu.sdcs.order.analysis.service.factory.cache;
+package org.sysu.sdcs.order.analysis.model.enums;
 
 /**
  * The kinds of cache

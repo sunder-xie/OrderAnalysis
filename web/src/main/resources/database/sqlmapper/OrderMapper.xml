@@ -6,9 +6,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<cache/>
 	<select id="findById" parameterType="long" resultType="org.sysu.sdcs.order.analysis.model.database.entity.Order">
 		SELECT 
-		orders.id AS id,
-		orders.customer AS customer,
-		orders.create_time AS time 
+			orders.id AS id,
+			orders.customer AS customer,
+			orders.create_time AS time 
 		FROM orders 
 		WHERE orders.create_time &lt;=NOW()
 		AND orders.create_time &gt;=DATE_ADD(NOW(),INTERVAL -1 MONTH)
@@ -16,9 +16,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	<select id="findAll" resultType="org.sysu.sdcs.order.analysis.model.database.entity.Order">
 		SELECT 
-		orders.id AS id,
-		orders.customer AS customer,
-		orders.create_time AS time 
+			orders.id AS id,
+			orders.customer AS customer,
+			orders.create_time AS time 
 		FROM orders 
 		WHERE orders.create_time &lt;=NOW()
 		AND orders.create_time &gt;=DATE_ADD(NOW(),INTERVAL -1 MONTH)
