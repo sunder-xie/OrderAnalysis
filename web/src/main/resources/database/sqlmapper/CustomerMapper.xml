@@ -23,4 +23,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			customer.address AS 'address'
 		FROM customer
 	</select>
+	
+	<insert id="add" parameterType="org.sysu.sdcs.order.analysis.model.database.entity.Customer">
+		INSERT INTO 
+			Customer
+			(name, sex, age, address) 
+		VALUES
+			(#{name}, #{sex}, #{age}, #{address})
+	</insert>
 </mapper>

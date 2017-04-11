@@ -4,13 +4,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Service;
-import org.sysu.sdcs.order.analysis.service.scheduler.CacheUpdateScheduler;
+import org.sysu.sdcs.order.analysis.service.scheduler.RepositoryUpdateScheduler;
 import org.sysu.sdcs.order.analysis.service.scheduler.ConfigureUpdateScheduler;
 
 @Service
 public class InitialAcition implements ApplicationListener<ContextRefreshedEvent> {
 	@Autowired
-	private CacheUpdateScheduler cacheUpdateScheduler;
+	private RepositoryUpdateScheduler cacheUpdateScheduler;
 	@Autowired
 	private ConfigureUpdateScheduler configureUpdateScheduler;
 
@@ -22,7 +22,7 @@ public class InitialAcition implements ApplicationListener<ContextRefreshedEvent
 	}
 
 	private void doInitial() {
-		cacheUpdateScheduler.start();
+		//cacheUpdateScheduler.start();
 		configureUpdateScheduler.start();
 	}
 

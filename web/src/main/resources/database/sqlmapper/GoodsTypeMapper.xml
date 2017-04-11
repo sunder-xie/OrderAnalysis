@@ -17,4 +17,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			goods_type.desc AS 'desc'
 		FROM goods_type
 	</select>
+	<insert id="add" parameterType="org.sysu.sdcs.order.analysis.model.database.entity.GoodsType">
+		INSERT INTO 
+			Goods_Type 
+			(`desc`) 
+		VALUES
+			(#{desc})
+	</insert>
 </mapper>

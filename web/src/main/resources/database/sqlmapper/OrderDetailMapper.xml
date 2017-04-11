@@ -23,4 +23,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			order_detail.goods_price AS 'price'
 		FROM order_detail
 	</select>
+	<insert id="add" parameterType="org.sysu.sdcs.order.analysis.model.database.entity.OrderDetail">
+		INSERT INTO 
+			Order_Detail 
+			(order_id, goods_id, goods_count, goods_price) 
+		VALUES 
+			(#{order}, #{goods}, #{count}, #{price})
+	</insert>
 </mapper>

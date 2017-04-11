@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 public class Order implements Serializable {
+	private static final long serialVersionUID = -1695094943865676601L;
 	private long id;
 	private long customer;
 	private Date time;

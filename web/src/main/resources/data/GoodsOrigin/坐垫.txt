@@ -1,0 +1,4 @@
+﻿Brand	尼罗河	紫风铃	牧宝	文丰	达令	河居	尚恒源祥	五福	金牛	蓝牧	吉洋祥	纳图	御马	COMFIER
+Prefix	真皮	塑料	真丝	棉	尼龙							
+Number	靠枕	坐垫	方向盘套									
+Suffix

@@ -6,10 +6,6 @@ public class GoodsTypeModel {
 	private String desc;
 	private Range<Double> price;
 
-	public GoodsTypeModel() {
-		price = new Range<>();
-	}
-
 	public String getDesc() {
 		return desc;
 	}
@@ -32,5 +28,13 @@ public class GoodsTypeModel {
 
 	public void setMinPrice(double min) {
 		price.setMin(new Double(min));
+	}
+
+	public Range<Double> getPrice() {
+		return price;
+	}
+
+	public void setPrice(Range<Double> price) {
+		this.price = price;
 	}
 }

@@ -1,12 +1,15 @@
 package org.sysu.sdcs.order.analysis.service.scheduler;
 
+import java.util.Date;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
-import org.sysu.sdcs.order.analysis.service.cache.ConfigureHelper;
-import org.sysu.sdcs.order.analysis.service.interfaces.Scheduler;
+import org.sysu.sdcs.order.analysis.model.interfaces.Scheduler;
+import org.sysu.sdcs.order.analysis.service.repository.ConfigureHelper;
+import org.sysu.sdcs.order.analysis.utils.common.DateUtil;
 
 @Service
 public class ConfigureUpdateScheduler implements Scheduler {
@@ -14,12 +17,10 @@ public class ConfigureUpdateScheduler implements Scheduler {
 	@Autowired
 	private ConfigureHelper configureHelper;
 
-	@Scheduled(cron = "${cache.refresh.interval}")
+	@Scheduled(cron = "${configure.refresh.interval}")
 	public void start() {
-		LOGGER.info("Begin update cache.");
-		long beginTime = System.currentTimeMillis();
+		LOGGER.info("Begin update configure scheduler.");
 		configureHelper.update();
-		long finishTime = System.currentTimeMillis();
-		LOGGER.info("Finish update cache, spend:{}ms.", finishTime - beginTime);
+		LOGGER.info("Finish update Configure scheduler, timestamp: {}.", DateUtil.completeFormat(new Date()));
 	}
 }

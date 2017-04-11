@@ -1,0 +1,4 @@
+﻿Brand	双飞燕	新贵	斐尔可	狼蛛	RK	赛睿	宜博	新盟	现代	优派	AKKO	森松尼	雷迪凯	灵逸	富勒	影级	ET
+Prefix	红色	蓝色	紫色	粉色													
+Number	鼠标	键盘	音响	耳机													
+Suffix

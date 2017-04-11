@@ -4,6 +4,7 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
@@ -44,5 +45,6 @@ public class RedisDAOTest {
 		value = new String(redisDAO.hGet(TEST_HASH_KEY, TEST_HASH_FIELD));
 		LOGGER.info("Redis hGet: {}.", value);
 		Map<byte[],byte[]> map= redisDAO.hGetAll(TEST_HASH_KEY);
+		Assert.assertNotNull(map);
 	}
 }

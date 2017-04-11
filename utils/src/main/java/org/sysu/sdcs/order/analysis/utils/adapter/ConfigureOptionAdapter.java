@@ -8,6 +8,8 @@ public class ConfigureOptionAdapter {
 		switch (type) {
 		case Customer:
 			return ConfigureOption.CUSTOMER_ANALYSIS_SWITCH;
+		case GoodsType:
+			return ConfigureOption.GOODS_TYPE_ANALYSIS_SWITCH;
 		default:
 			throw new NullPointerException(String.format("There is not executorType: %s.", type.toString()));
 		}

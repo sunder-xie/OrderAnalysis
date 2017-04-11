@@ -1,0 +1,4 @@
+﻿Brand	莱布斯	点缤	正美丰业	信义	路趣	银宏	阿派斯	老垫家	铂晟	保赐利	紫风铃	维诺亚
+Prefix	蓝光	防紫外线										
+Number	玻璃											
+Suffix	L	XL	XXL

@@ -12,4 +12,5 @@ public interface CustomerMapper
 {
     public Customer findById(long id) throws Exception;
     public List<Customer> findAll() throws Exception;
+    public int add(Customer customer) throws Exception;
 }

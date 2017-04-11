@@ -19,4 +19,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			supplier.phone AS 'phone'
 		FROM supplier 
 	</select>
+	<insert id="add" parameterType="org.sysu.sdcs.order.analysis.model.database.entity.Supplier">
+		INSERT INTO 
+			Supplier 
+			(name, phone) 
+		VALUES 
+			(#{name}, #{phone})
+	</insert>
 </mapper>

@@ -6,14 +6,21 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-public class OrderIndex extends HashMap<Long, Set<Long>> {
-	public void add(Long key, Long value) {
+public class OrderIndex extends HashMap<String, Set<String>> {
+	private static final long serialVersionUID = 604516952680909996L;
+
+	public void add(String key, long value) {
 		if (!super.containsKey(key)) {
 			super.put(key, new HashSet<>());
 		}
-		super.get(key).add(value);
+		super.get(key).add(String.valueOf(value));
 	}
-	public List<Long> get(Long key) {
-		return new ArrayList<Long>(super.get(key));
+
+	public List<String> get(String key) {
+		Set<String> result = super.get(key);
+		if(result == null){
+			return new ArrayList<String>();
+		}
+		return new ArrayList<String>(result);
 	}
 }

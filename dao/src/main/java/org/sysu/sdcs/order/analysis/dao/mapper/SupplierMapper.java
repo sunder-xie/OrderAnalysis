@@ -12,4 +12,5 @@ public interface SupplierMapper
 {
     public Supplier findById(long id) throws Exception;
     public List<Supplier> findAll() throws Exception;
+    public int add(Supplier supplier) throws Exception;
 }

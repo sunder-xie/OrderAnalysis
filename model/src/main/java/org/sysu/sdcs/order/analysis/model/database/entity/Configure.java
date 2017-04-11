@@ -2,7 +2,8 @@ package org.sysu.sdcs.order.analysis.model.database.entity;
 
 import java.io.Serializable;
 
-public class Configure implements Serializable{
+public class Configure implements Serializable {
+	private static final long serialVersionUID = -740099623280028279L;
 	private int id;
 	private String name;
 	private String content;

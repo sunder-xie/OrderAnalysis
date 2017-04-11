@@ -1,0 +1,4 @@
+﻿Brand	英特尔	AMD	微星	华擎	舒尔		
+Prefix	第一代	第二代	第三代	第四代	第五代	第六代	第七代
+Number	双核	四核	八核				
+Suffix	CISC	RISC	IA-64

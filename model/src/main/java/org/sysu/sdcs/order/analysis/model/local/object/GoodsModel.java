@@ -1,26 +1,26 @@
 package org.sysu.sdcs.order.analysis.model.local.object;
 
 public class GoodsModel {
-	private long type;
-	private long supplier;
+	private String type;
+	private String supplier;
 	private String name;
 	private String desc;
 	private double price;
 	private int stock;
 
-	public long getType() {
+	public String getType() {
 		return type;
 	}
 
-	public void setType(long type) {
+	public void setType(String type) {
 		this.type = type;
 	}
 
-	public long getSupplier() {
+	public String getSupplier() {
 		return supplier;
 	}
 
-	public void setSupplier(long supplier) {
+	public void setSupplier(String supplier) {
 		this.supplier = supplier;
 	}
 

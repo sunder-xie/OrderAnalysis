@@ -12,4 +12,5 @@ public interface GoodsMapper
 {
     public Goods findById(long id) throws Exception;
     public List<Goods> findAll() throws Exception;
+    public int add(Goods goods) throws Exception;
 }

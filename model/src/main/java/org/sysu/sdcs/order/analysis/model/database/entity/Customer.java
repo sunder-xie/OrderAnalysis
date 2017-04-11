@@ -4,9 +4,11 @@ import java.io.Serializable;
 
 /**
  * Customer Information in Database
+ * 
  * @author Zhuang Yixin
  */
 public class Customer implements Serializable {
+	private static final long serialVersionUID = -8084778870684891170L;
 	private long id;
 	private String name;
 	private Sex sex;

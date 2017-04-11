@@ -1,15 +1,15 @@
 package org.sysu.sdcs.order.analysis.model.local.object;
 
 public class OrderDetailModel {
-	private long goods;
+	private String goods;
 	private double price;
 	private int count;
 
-	public long getGoods() {
+	public String getGoods() {
 		return goods;
 	}
 
-	public void setGoods(long goods) {
+	public void setGoods(String goods) {
 		this.goods = goods;
 	}
 

@@ -1,0 +1,4 @@
+﻿Brand	小米	三星	苹果	华为	魅族	OPPO	VIVO	360	乐视	锤子	一加	努比亚	索尼	金立	夏普	华硕	联想	中兴	诺基亚
+Prefix	多啦A梦	HelloKitty	海贼王	火影忍者	天线宝宝	樱桃小丸子	超人	风景	宇宙	汽车									
+Number	手机壳																		
+Suffix	红色	黑色	白色	蓝色	紫色														

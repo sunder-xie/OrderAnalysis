@@ -27,4 +27,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			goods.stock AS 'stock'
 		FROM goods
 	</select>
+	<insert id="add" parameterType="org.sysu.sdcs.order.analysis.model.database.entity.Goods">
+		INSERT INTO Goods 
+			(type, supplier, name, `desc`, price, stock) 
+		VALUES 
+			(#{type}, #{supplier}, #{name}, #{desc}, #{price}, #{stock})
+	</insert>
 </mapper>

@@ -3,6 +3,7 @@ package org.sysu.sdcs.order.analysis.model.database.entity;
 import java.io.Serializable;
 
 public class Goods implements Serializable {
+	private static final long serialVersionUID = 4463741771038275267L;
 	private long id;
 	private long type;
 	private long supplier;

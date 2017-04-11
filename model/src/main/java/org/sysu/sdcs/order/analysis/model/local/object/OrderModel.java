@@ -4,15 +4,15 @@ import java.util.Date;
 import java.util.List;
 
 public class OrderModel {
-	private long customer;
+	private String customer;
 	private Date time;
 	private List<OrderDetailModel> details;
 
-	public long getCustomer() {
+	public String getCustomer() {
 		return customer;
 	}
 
-	public void setCustomer(long customer) {
+	public void setCustomer(String customer) {
 		this.customer = customer;
 	}
 

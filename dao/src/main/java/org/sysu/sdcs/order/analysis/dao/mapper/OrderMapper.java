@@ -12,4 +12,5 @@ public interface OrderMapper
 {
     public Order findById(long id) throws Exception;
     public List<Order> findAll() throws Exception;
+    public int add(Order order) throws Exception;
 }

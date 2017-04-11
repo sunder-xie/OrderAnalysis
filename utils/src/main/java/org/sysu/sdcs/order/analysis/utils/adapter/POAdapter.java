@@ -45,14 +45,14 @@ public class POAdapter {
 		model.setName(goods.getName());
 		model.setPrice(goods.getPrice());
 		model.setStock(goods.getStock());
-		model.setSupplier(goods.getSupplier());
-		model.setType(goods.getType());
+		model.setSupplier(goods.getSupplier()+"");
+		model.setType(goods.getType()+"");
 		return model;
 	}
 
 	public static OrderModel convert(Order order) {
 		OrderModel model = new OrderModel();
-		model.setCustomer(order.getCustomer());
+		model.setCustomer(order.getCustomer()+"");
 		model.setTime(order.getTime());
 		
 		return model;
@@ -61,7 +61,7 @@ public class POAdapter {
 	public static OrderDetailModel convert(OrderDetail orderDetail) {
 		OrderDetailModel model = new OrderDetailModel();
 		model.setCount(orderDetail.getCount());
-		model.setGoods(orderDetail.getGoods());
+		model.setGoods(orderDetail.getGoods()+"");
 		model.setPrice(orderDetail.getPrice());
 		return model;
 	}
