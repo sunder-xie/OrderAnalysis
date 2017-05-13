@@ -21,7 +21,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			orders.create_time AS time 
 		FROM orders 
 		WHERE orders.create_time &lt;=NOW()
-		AND orders.create_time &gt;=DATE_ADD(NOW(),INTERVAL -6 DAY)
+		AND orders.create_time &gt;=DATE_ADD(NOW(),INTERVAL -21 DAY)
 	</select>
 	<insert id="add" parameterType="org.sysu.sdcs.order.analysis.model.database.entity.Order">
 		INSERT INTO 

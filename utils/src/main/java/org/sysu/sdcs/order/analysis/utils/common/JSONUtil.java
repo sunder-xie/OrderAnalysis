@@ -3,6 +3,8 @@ package org.sysu.sdcs.order.analysis.utils.common;
 
 import java.lang.reflect.Type;
 
+import org.sysu.sdcs.order.analysis.model.redis.entity.CustomerRedisEntity;
+
 import com.google.gson.Gson;
 
 public class JSONUtil {
@@ -17,4 +19,5 @@ public class JSONUtil {
 	public static <T> T deserialize(String json,Type classOfT) {
 		return gson.fromJson(json, classOfT);
 	}
+
 }

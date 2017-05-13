@@ -14,12 +14,14 @@ import org.sysu.sdcs.order.analysis.dao.mapper.OrderMapper;
 import org.sysu.sdcs.order.analysis.dao.mapper.SupplierMapper;
 import org.sysu.sdcs.order.analysis.dao.redis.RedisDAO;
 import org.sysu.sdcs.order.analysis.model.mvc.request.EmailRequest;
+import org.sysu.sdcs.order.analysis.service.classifier.CustomerClassifier;
 import org.sysu.sdcs.order.analysis.service.email.EmailService;
 import org.sysu.sdcs.order.analysis.service.factory.index.IndexStore;
 import org.sysu.sdcs.order.analysis.service.repository.CustomerRepository;
 import org.sysu.sdcs.order.analysis.service.repository.GoodsRepository;
 import org.sysu.sdcs.order.analysis.service.repository.GoodsTypeRepository;
 import org.sysu.sdcs.order.analysis.service.repository.OrderRepository;
+import org.sysu.sdcs.order.analysis.utils.common.JSONUtil;
 
 @Controller
 @RequestMapping("/utils")
@@ -29,6 +31,8 @@ public class UtilsController {
 	private EmailService emailService;
 	@Autowired
 	private RedisDAO redisDAO;
+	@Autowired
+	private CustomerClassifier classifier;
 	@Autowired
 	private SupplierMapper supplierMapper;
 	@Autowired
@@ -63,6 +67,14 @@ public class UtilsController {
 	public boolean sendEmail(@PathVariable("key") String key, @PathVariable("value") String value) {
 		return redisDAO.set(key, value.getBytes());
 	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/getCluster", method = RequestMethod.GET)
+	public String getClusterByCustomer(int customer) {
+		int cluster = classifier.getClusterByCustomer(customer);
+		return JSONUtil.serialize(cluster);
+	}
+	
 //
 //	@ResponseBody
 //	@RequestMapping(value = "/addSupplier", method = RequestMethod.GET)

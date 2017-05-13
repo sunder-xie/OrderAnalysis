@@ -21,6 +21,11 @@ public class Counter<T> {
 		}
 	}
 
+	public void add(T index, int value) {
+		int oldValue = get(index);
+		data.put(index, oldValue + value);
+	}
+
 	public int get(T index) {
 		Integer count = data.get(index);
 		if (count == null) {
